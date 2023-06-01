@@ -12,18 +12,8 @@
             android:theme="@style/Theme.Recipees"
             tools:targetApi="31">
         <activity
-                android:name=".NavigationActivity"
-                android:exported="false"/>
-        <activity
-                android:name=".BaseActivity"
-                android:exported="false"/>
-        <activity
-                android:name=".activities.HomeActivity"
-                android:exported="false"/>
-        <activity
-                android:name=".activities.SplashActivity"
-                android:exported="true"
-                android:screenOrientation="locked">
+                android:name=".ui.NavigationActivity"
+                android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
