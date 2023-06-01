@@ -16,7 +16,7 @@ class SupAdapter :RecyclerView.Adapter<SupAdapter.SupViewHolder>(){
     }
     class SupViewHolder (view: View) : RecyclerView.ViewHolder(view){
 
-        var textS = itemView.findViewById<TextView>(R.id.textS)
+//        var textS = itemView.findViewById<TextView>(R.id.textS)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SupViewHolder {
@@ -29,6 +29,6 @@ class SupAdapter :RecyclerView.Adapter<SupAdapter.SupViewHolder>(){
     }
 
     override fun onBindViewHolder(holder: SupViewHolder, position: Int) {
-        holder.textS.text = subArray.get(position).categories.get(position).strCategory
+//        holder.textS.text = subArray.get(position).categories.get(position).strCategory
     }
 }

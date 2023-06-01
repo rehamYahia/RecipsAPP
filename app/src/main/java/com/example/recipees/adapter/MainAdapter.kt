@@ -6,18 +6,19 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.recipees.R
+import com.example.recipees.entities.Category
 import com.example.recipees.entities.Recipies
 
-class MainAdapter : RecyclerView.Adapter<MainAdapter.MainViewHolder> {
-    var mainArray : ArrayList<Recipies> = ArrayList()
+class MainAdapter : RecyclerView.Adapter<MainAdapter.MainViewHolder>() {
+    var mainArray : ArrayList<Category> = ArrayList()
 
-//    fun setData(arrData : List<Recipies>){
-//        mainArray = arrData as ArrayList<Recipies>
-//    }
-
-    constructor(conArray:ArrayList<Recipies>){
-        this.mainArray = conArray
+    fun setData(arrData: List<Category>?){
+        mainArray = arrData as ArrayList<Category>
     }
+
+//    constructor(conArray:ArrayList<Recipies>){
+//        this.mainArray = conArray
+//    }
 
     class MainViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         var textM = itemView.findViewById<TextView>(R.id.textM)
@@ -33,6 +34,6 @@ class MainAdapter : RecyclerView.Adapter<MainAdapter.MainViewHolder> {
     }
 
     override fun onBindViewHolder(holder: MainViewHolder, position: Int) {
-        holder.textM.text = mainArray.get(position).name
+        holder.textM.text = mainArray.get(position).categories.get(position).strCategory
     }
 }
