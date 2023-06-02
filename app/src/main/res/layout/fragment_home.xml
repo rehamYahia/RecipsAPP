@@ -48,7 +48,7 @@
 
 
             <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/mainRecycle"
+                    android:id="@+id/second_meal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_10sdp"
@@ -65,7 +65,7 @@
                     android:textSize="20sp"/>
 
             <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/sub_data_name"
+                    android:id="@+id/first_meal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
 

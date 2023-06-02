@@ -6,17 +6,19 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.recipees.R
-import com.example.recipees.entities.Category
+import com.example.recipees.model.MealsData
+
 
 class SupAdapter :RecyclerView.Adapter<SupAdapter.SupViewHolder>(){
-    var subArray:ArrayList<Category> = ArrayList()
+   private var MealsArray:ArrayList<MealsData> = ArrayList()
 
-    fun setArray(arrData: List<Category>?){
-        subArray = arrData as ArrayList<Category>
+   public fun setArray(arrData: ArrayList<MealsData>){
+        MealsArray = arrData
     }
     class SupViewHolder (view: View) : RecyclerView.ViewHolder(view){
 
-//        var textS = itemView.findViewById<TextView>(R.id.textS)
+        var title = itemView.findViewById<TextView>(R.id.mealaTitle)
+        var description = itemView.findViewById<TextView>(R.id.mealsDescription)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SupViewHolder {
@@ -24,11 +26,13 @@ class SupAdapter :RecyclerView.Adapter<SupAdapter.SupViewHolder>(){
     }
 
     override fun getItemCount(): Int {
-        return subArray.size
+        return MealsArray.size
 
     }
 
     override fun onBindViewHolder(holder: SupViewHolder, position: Int) {
 //        holder.textS.text = subArray.get(position).categories.get(position).strCategory
+        holder.title.text = MealsArray.get(position).strCategory
+        holder.description.text = MealsArray.get(position).strCategoryDescription
     }
 }

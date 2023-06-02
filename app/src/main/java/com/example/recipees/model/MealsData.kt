@@ -1,6 +1,6 @@
 package com.example.recipees.model
 
-data class Category(
+data class MealsData(
     val idCategory: String,
     val strCategory: String,
     val strCategoryDescription: String,
