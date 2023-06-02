@@ -50,7 +50,6 @@ class HomeFragment : Fragment() {
         lifecycleScope.launch {
             mealsViewModel.firstMeal.collect{
                 supAdapter?.setArray(it!!)
-
             }
         }
         binding.firstMeal.adapter = supAdapter
