@@ -10,13 +10,10 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.recipees.R
 import com.example.recipees.adapter.SupAdapter
 import com.example.recipees.databinding.FragmentHomeBinding
-import com.example.recipees.databinding.FragmentSplashBinding
 import com.example.recipees.viewmodel.MealsViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 
@@ -30,15 +27,13 @@ class HomeFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         navControler = findNavController()
-        supAdapter = SupAdapter()
-
     }
 
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val view = binding.root
         return view
@@ -47,6 +42,7 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         mealsViewModel.getFirstMeal()
+        supAdapter = SupAdapter()
         lifecycleScope.launch {
             mealsViewModel.firstMeal.collect{
                 supAdapter?.setArray(it!!)

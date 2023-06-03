@@ -47,13 +47,13 @@
             </androidx.cardview.widget.CardView>
 
 
-            <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/second_meal"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:layout_marginLeft="@dimen/_5sdp"
-            />
+<!--            <androidx.recyclerview.widget.RecyclerView-->
+<!--                    android:id="@+id/second_meal"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginTop="@dimen/_10sdp"-->
+<!--                    android:layout_marginLeft="@dimen/_5sdp"-->
+<!--            />-->
 
             <TextView
                     android:layout_width="wrap_content"
