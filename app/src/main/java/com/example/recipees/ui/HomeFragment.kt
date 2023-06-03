@@ -1,5 +1,6 @@
 package com.example.recipees.ui
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -14,6 +15,7 @@ import com.example.recipees.adapter.SupAdapter
 import com.example.recipees.databinding.FragmentHomeBinding
 import com.example.recipees.viewmodel.MealsViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 
@@ -21,12 +23,11 @@ import kotlinx.coroutines.launch
 class HomeFragment : Fragment() {
     private  var _binding: FragmentHomeBinding?=null
     private val binding get()= _binding!!
-    private lateinit var navControler: NavController
     private val mealsViewModel :MealsViewModel by viewModels()
-    private var supAdapter : SupAdapter ?=null
+    private lateinit var supAdapter : SupAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        navControler = findNavController()
+        supAdapter = SupAdapter()
     }
 
 
@@ -39,13 +40,14 @@ class HomeFragment : Fragment() {
         return view
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         mealsViewModel.getFirstMeal()
-        supAdapter = SupAdapter()
-        lifecycleScope.launch {
+        lifecycleScope.launch{
             mealsViewModel.firstMeal.collect{
-                supAdapter?.setArray(it!!)
+                supAdapter.setArray(it!!)
+                supAdapter.notifyDataSetChanged()
             }
         }
         binding.firstMeal.adapter = supAdapter

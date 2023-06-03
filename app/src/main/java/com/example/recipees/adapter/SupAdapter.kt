@@ -32,7 +32,7 @@ class SupAdapter :RecyclerView.Adapter<SupAdapter.SupViewHolder>(){
 
     override fun onBindViewHolder(holder: SupViewHolder, position: Int) {
 //        holder.textS.text = subArray.get(position).categories.get(position).strCategory
-        holder.title.text = MealsArray.get(position).strCategory
-        holder.description.text = MealsArray.get(position).strCategoryDescription
+        holder.title.text = MealsArray[position].strCategory
+        holder.description.text = MealsArray[position].strCategoryDescription
     }
 }

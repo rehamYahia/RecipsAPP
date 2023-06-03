@@ -1,8 +1,8 @@
 package com.example.recipees.model
 
-data class MealsData(
-    val idCategory: String,
-    val strCategory: String,
-    val strCategoryDescription: String,
-    val strCategoryThumb: String
-)
+public  class MealsData{
+    var idCategory: String?=null
+    var strCategory: String?=null
+    var strCategoryDescription: String?=null
+    var strCategoryThumb: String?=null
+}
