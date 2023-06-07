@@ -44,7 +44,7 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         mealsViewModel.getFirstMeal()
-        lifecycleScope.launch{
+        lifecycleScope.launchWhenStarted{
             mealsViewModel.firstMeal.collect{
                 supAdapter.setArray(it!!)
                 supAdapter.notifyDataSetChanged()

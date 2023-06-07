@@ -14,11 +14,12 @@ import javax.inject.Inject
 @HiltViewModel
 class MealsViewModel @Inject constructor(private val mealsRepo: MealsRepo) :ViewModel() {
     private val _firstMeal : MutableStateFlow<ArrayList<MealsData>?> = MutableStateFlow(null)
-     val firstMeal :StateFlow<ArrayList<MealsData>?> = _firstMeal
+     val firstMeal :MutableStateFlow<ArrayList<MealsData>?> = _firstMeal
 
     fun getFirstMeal(){
         viewModelScope.launch {
-            _firstMeal.value = mealsRepo.getMealsFromRemote()
+//            _firstMeal.value = mealsRepo.getMealsFromRemote()
+            _firstMeal.emit(mealsRepo.getMealsFromRemote())
         }
     }
 }
