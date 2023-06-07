@@ -2,6 +2,7 @@ package com.example.recipees.ui
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,6 +17,7 @@ import com.example.recipees.databinding.FragmentHomeBinding
 import com.example.recipees.viewmodel.MealsViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.buffer
 import kotlinx.coroutines.launch
 
 
@@ -44,14 +46,15 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         mealsViewModel.getFirstMeal()
-        lifecycleScope.launchWhenStarted{
-            mealsViewModel.firstMeal.collect{
-                supAdapter.setArray(it!!)
-                supAdapter.notifyDataSetChanged()
+        lifecycleScope.launch{
+            mealsViewModel.firstMeal.buffer().collect{
+//                supAdapter.setArray(it!!)
+//                supAdapter.notifyDataSetChanged()
+//                   Log.d("here" , it!![3].strCategoryDescription.toString())
             }
         }
-        binding.firstMeal.adapter = supAdapter
-        binding.firstMeal.layoutManager = LinearLayoutManager(activity ,LinearLayoutManager.HORIZONTAL ,false)
+//        binding.firstMeal.adapter = supAdapter
+//        binding.firstMeal.layoutManager = LinearLayoutManager(activity ,LinearLayoutManager.HORIZONTAL ,false)
     }
 
 

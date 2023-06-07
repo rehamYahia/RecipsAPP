@@ -31,7 +31,7 @@ class SplashFragment : Fragment() {
         return view
     }
 
-//    @SuppressLint("SuspiciousIndentation")
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.splashBtn.setOnClickListener {
@@ -39,5 +39,4 @@ class SplashFragment : Fragment() {
             navControler.navigate(action)
         }
     }
-
 }
