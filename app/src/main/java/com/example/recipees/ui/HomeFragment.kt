@@ -26,10 +26,10 @@ class HomeFragment : Fragment() {
     private  var _binding: FragmentHomeBinding?=null
     private val binding get()= _binding!!
     private val mealsViewModel :MealsViewModel by viewModels()
-    private lateinit var supAdapter : SupAdapter
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        supAdapter = SupAdapter()
+
     }
 
 
@@ -46,14 +46,16 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         mealsViewModel.getFirstMeal()
+        val supAdapter = SupAdapter()
         lifecycleScope.launch{
             mealsViewModel.firstMeal.buffer().collect{
-//                supAdapter.setArray(it!!)
+                supAdapter.setArray(it!!)
+                binding.firstMeal.adapter = supAdapter
 //                supAdapter.notifyDataSetChanged()
 //                   Log.d("here" , it!![3].strCategoryDescription.toString())
             }
         }
-//        binding.firstMeal.adapter = supAdapter
+
 //        binding.firstMeal.layoutManager = LinearLayoutManager(activity ,LinearLayoutManager.HORIZONTAL ,false)
     }
 

@@ -3,8 +3,10 @@ package com.example.recipees.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.recipees.R
 import com.example.recipees.model.MealsData
 
@@ -17,8 +19,9 @@ class SupAdapter :RecyclerView.Adapter<SupAdapter.SupViewHolder>(){
     }
     class SupViewHolder (view: View) : RecyclerView.ViewHolder(view){
 
-        var title = itemView.findViewById<TextView>(R.id.mealaTitle)
-        var description = itemView.findViewById<TextView>(R.id.mealsDescription)
+        var title = view.findViewById<TextView>(R.id.mealaTitle)
+        var description = view.findViewById<TextView>(R.id.mealsDescription)
+        var image = view.findViewById<ImageView>(R.id.subImage)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SupViewHolder {
@@ -34,5 +37,7 @@ class SupAdapter :RecyclerView.Adapter<SupAdapter.SupViewHolder>(){
 //        holder.textS.text = subArray.get(position).categories.get(position).strCategory
         holder.title.text = MealsArray[position].strCategory
         holder.description.text = MealsArray[position].strCategoryDescription
+        Glide.with(holder.itemView.rootView.context).load( MealsArray[position].strCategoryThumb).into(holder.image)
+
     }
 }

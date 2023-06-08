@@ -65,9 +65,11 @@
                     android:textSize="20sp"/>
 
             <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/first_meal"
+                    android:id="@+id/firstMeal"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            />
 
 
         </LinearLayout>

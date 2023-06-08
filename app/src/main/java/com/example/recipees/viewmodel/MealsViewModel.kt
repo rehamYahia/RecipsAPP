@@ -1,5 +1,6 @@
 package com.example.recipees.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.recipees.model.MealsData
@@ -14,12 +15,17 @@ import javax.inject.Inject
 @HiltViewModel
 class MealsViewModel @Inject constructor(private val mealsRepo: MealsRepo) :ViewModel() {
     private val _firstMeal : MutableStateFlow<ArrayList<MealsData>?> = MutableStateFlow(null)
-     val firstMeal :MutableStateFlow<ArrayList<MealsData>?> = _firstMeal
+     val firstMeal :StateFlow<ArrayList<MealsData>?> = _firstMeal
 
     fun getFirstMeal(){
         viewModelScope.launch {
-//            _firstMeal.value = mealsRepo.getMealsFromRemote()
-            _firstMeal.emit(mealsRepo.getMealsFromRemote())
+            try{
+                _firstMeal.value = mealsRepo.getMealsFromRemote()
+            }catch (e:Exception){
+                Log.e("here" , e.message.toString())
+            }
+
+//            _firstMeal.emit(mealsRepo.getMealsFromRemote())
         }
     }
 }
