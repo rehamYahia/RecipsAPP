@@ -9,14 +9,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.recipees.R
 import com.example.recipees.model.MealsData
+import com.example.recipees.model.Response
 
 
-class SupAdapter :RecyclerView.Adapter<SupAdapter.SupViewHolder>(){
-   private var MealsArray:ArrayList<MealsData> = ArrayList()
+class SupAdapter(private val response: Response) :RecyclerView.Adapter<SupAdapter.SupViewHolder>(){
 
-   public fun setArray(arrData: ArrayList<MealsData>){
-        MealsArray = arrData
-    }
     class SupViewHolder (view: View) : RecyclerView.ViewHolder(view){
 
         var title = view.findViewById<TextView>(R.id.mealaTitle)
@@ -29,15 +26,15 @@ class SupAdapter :RecyclerView.Adapter<SupAdapter.SupViewHolder>(){
     }
 
     override fun getItemCount(): Int {
-        return MealsArray.size
+        return response.categories.size
 
     }
 
     override fun onBindViewHolder(holder: SupViewHolder, position: Int) {
 //        holder.textS.text = subArray.get(position).categories.get(position).strCategory
-        holder.title.text = MealsArray[position].strCategory
-        holder.description.text = MealsArray[position].strCategoryDescription
-        Glide.with(holder.itemView.rootView.context).load( MealsArray[position].strCategoryThumb).into(holder.image)
+        holder.title.text = response.categories[position].strCategory
+        holder.description.text = response.categories[position].strCategoryDescription
+        Glide.with(holder.itemView.rootView.context).load( response.categories[position].strCategoryThumb).into(holder.image)
 
     }
 }
