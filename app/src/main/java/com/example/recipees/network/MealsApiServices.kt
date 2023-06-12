@@ -1,8 +1,6 @@
 package com.example.recipees.network
 
-import com.example.recipees.model.MealsData
 import com.example.recipees.model.Response
-import retrofit2.Retrofit
 import retrofit2.http.GET
 
 interface MealsApiServices {
