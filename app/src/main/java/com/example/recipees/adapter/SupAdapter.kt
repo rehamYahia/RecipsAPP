@@ -12,7 +12,11 @@ import com.example.recipees.model.Category
 import com.example.recipees.model.Response
 
 
-class SupAdapter(private val response: Response) :RecyclerView.Adapter<SupAdapter.SupViewHolder>(){
+class SupAdapter() :RecyclerView.Adapter<SupAdapter.SupViewHolder>(){
+    private var   list:ArrayList<Category> = java.util.ArrayList()
+    public fun setData(arr:ArrayList<Category>){
+        list = arr
+    }
 
     class SupViewHolder (view: View) : RecyclerView.ViewHolder(view){
 
@@ -26,15 +30,15 @@ class SupAdapter(private val response: Response) :RecyclerView.Adapter<SupAdapte
     }
 
     override fun getItemCount(): Int {
-        return response.categories.size
+        return list.size
 
     }
 
     override fun onBindViewHolder(holder: SupViewHolder, position: Int) {
 //        holder.textS.text = subArray.get(position).categories.get(position).strCategory
-        holder.title.text = response.categories[position].strCategory
-        holder.description.text = response.categories[position].strCategoryDescription
-        Glide.with(holder.itemView.rootView.context).load( response.categories[position].strCategoryThumb).into(holder.image)
+        holder.title.text = list[position].strCategory
+        holder.description.text = list[position].strCategoryDescription
+        Glide.with(holder.itemView.rootView.context).load( list[position].strCategoryThumb).into(holder.image)
 
     }
 }

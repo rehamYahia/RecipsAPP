@@ -5,14 +5,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_marginLeft="@dimen/_10sdp"
-    android:layout_marginTop="@dimen/_5sdp"
+    android:layout_marginTop="@dimen/_10sdp"
+              android:layout_marginRight="@dimen/_10sdp"
+
     >
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_230sdp"
+        android:layout_height="@dimen/_150sdp"
         app:cardCornerRadius="@dimen/_15sdp"
-        app:cardElevation="@dimen/_5sdp"
-        app:cardBackgroundColor="@color/black_grey"
+        app:cardElevation="@dimen/_8sdp"
+        app:cardBackgroundColor="@color/white"
 
         >
         <ImageView

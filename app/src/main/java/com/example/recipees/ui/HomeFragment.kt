@@ -44,8 +44,12 @@ class HomeFragment : Fragment() {
         mealsViewModel.getFirstMeal()
         lifecycleScope.launch{
             try {
+                val supAdapter = SupAdapter()
                 mealsViewModel.firstMeal.collect{
-                    binding.firstMeal.adapter = SupAdapter(it!!)
+                    if (it != null) {
+                        supAdapter.setData(it.categories)
+                    }
+                    binding.firstMeal.adapter = supAdapter
                     binding.firstMeal.layoutManager = LinearLayoutManager(activity ,RecyclerView.HORIZONTAL ,false)
                 }
             }catch (e:Exception){
