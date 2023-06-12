@@ -9,9 +9,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.recipees.R
 import com.example.recipees.model.Category
+import com.example.recipees.model.Response
 
 
-class SupAdapter(private val response: List<Category>) :RecyclerView.Adapter<SupAdapter.SupViewHolder>(){
+class SupAdapter(private val response: Response) :RecyclerView.Adapter<SupAdapter.SupViewHolder>(){
 
     class SupViewHolder (view: View) : RecyclerView.ViewHolder(view){
 
@@ -25,15 +26,15 @@ class SupAdapter(private val response: List<Category>) :RecyclerView.Adapter<Sup
     }
 
     override fun getItemCount(): Int {
-        return response.size
+        return response.categories.size
 
     }
 
     override fun onBindViewHolder(holder: SupViewHolder, position: Int) {
 //        holder.textS.text = subArray.get(position).categories.get(position).strCategory
-        holder.title.text = response[position].strCategory
-        holder.description.text = response[position].strCategoryDescription
-        Glide.with(holder.itemView.rootView.context).load( response[position].strCategoryThumb).into(holder.image)
+        holder.title.text = response.categories[position].strCategory
+        holder.description.text = response.categories[position].strCategoryDescription
+        Glide.with(holder.itemView.rootView.context).load( response.categories[position].strCategoryThumb).into(holder.image)
 
     }
 }

@@ -17,13 +17,8 @@ class MealsViewModel @Inject constructor(private val mealsRepo: MealsRepo) :View
 
     fun getFirstMeal(){
         viewModelScope.launch {
-            _firstMeal.emit(mealsRepo.getMealsFromRemote())
+//            _firstMeal.emit(mealsRepo.getMealsFromRemote())
+            _firstMeal.value = mealsRepo.getMealsFromRemote()
         }
     }
 }
-
-//try{
-//    _firstMeal.emit(mealsRepo.getMealsFromRemote())
-//}catch (e:Exception){
-//    Log.e("here" , e.message.toString())
-//}
