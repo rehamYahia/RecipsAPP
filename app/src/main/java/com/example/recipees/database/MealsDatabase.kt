@@ -6,7 +6,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.example.recipees.model.Category
 
-@Database(entities = [Category::class.java] , version = 1)
+@Database(entities = [Category::class] , version = 1)
 abstract class MealsDatabase  :RoomDatabase(){
 
     abstract fun getDao():MealsDao
