@@ -3,8 +3,9 @@ package com.example.recipees.database
 import android.content.Context
 import androidx.room.*
 import com.example.recipees.model.Category
+import com.example.recipees.model.Response
 
-@Database(entities = [Category::class] , version = 1)
+@Database(entities = [Response::class] , version = 1 , exportSchema = false)
 @TypeConverters(Converters::class)
 abstract class MealsDatabase  :RoomDatabase(){
 

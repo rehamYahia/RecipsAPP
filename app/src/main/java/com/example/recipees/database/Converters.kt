@@ -6,12 +6,12 @@ import com.google.gson.Gson
 
 class Converters {
     @TypeConverter
-    public fun fromStringToList(stringMeal : String):ArrayList<Category>{
-        return Gson().fromJson(stringMeal , ArrayList<Category>())
+    public fun fromStringToCategory(stringMeal : String):Category{
+        return Gson().fromJson(stringMeal , Category::class.java)
     }
 
     @TypeConverter
-    public fun fromListToString(array:ArrayList<Category>):String{
-        return Gson().toJson(array)
+    public fun fromCategoryToString(category: Category):String{
+        return Gson().toJson(category)
     }
 }
