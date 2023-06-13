@@ -4,15 +4,14 @@ import com.example.recipees.database.MealsDao
 import com.example.recipees.model.Category
 import com.example.recipees.model.Response
 import com.example.recipees.network.MealsApiServices
+import kotlinx.coroutines.flow.StateFlow
 
 class MealsRepoImp(private val mealsApiServices: MealsApiServices, private val mealsDao: MealsDao) :MealsRepo {
     override suspend fun getMealsFromRemote(): Response = mealsApiServices.getMeals()
-    override suspend fun insertMealToDatabase() {
-        val list = mealsApiServices.getMeals().categories
-        for (i in list){
-            mealsDao.insertMealsCategory(i)
-        }
+    override suspend fun insertMealToDatabase(category: Category) {
+        mealsDao.insertMealsCategory(category)
+
     }
 
-    override suspend fun GetAllMealsFromDatabase(): ArrayList<Category>  = mealsDao.getAllMealsOne()
+    override suspend fun mGetAllMealsFromDatabase(): StateFlow<ArrayList<Category>> = mealsDao.getAllMealsOne()
 }

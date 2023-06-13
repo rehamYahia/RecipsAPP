@@ -17,8 +17,8 @@ class MealsViewModel @Inject constructor(private val mealsRepo: MealsRepo) :View
     private val _firstMeal : MutableStateFlow<Response?> = MutableStateFlow(null)
      val firstMeal : StateFlow<Response?> = _firstMeal
 
-    private val _roomMeal : MutableStateFlow<ArrayList<Category>?> = MutableStateFlow(null)
-    val roomMeal : StateFlow<ArrayList<Category>?> = _roomMeal
+//    private val _roomMeal : MutableStateFlow<ArrayList<Category>?> = MutableStateFlow(null)
+    var roomMeal : StateFlow<ArrayList<Category>>? = null
 
     fun getFirstMeal(){
         viewModelScope.launch {
@@ -28,13 +28,16 @@ class MealsViewModel @Inject constructor(private val mealsRepo: MealsRepo) :View
 
     fun insertData(){
         viewModelScope.launch{
-            mealsRepo.insertMealToDatabase()
+            val list = mealsRepo.getMealsFromRemote().categories
+        for (i in list){
+            mealsRepo.insertMealToDatabase(i)
+        }
         }
     }
 
     fun getDataFromDatabase(){
         viewModelScope.launch {
-            _roomMeal.value =  mealsRepo.GetAllMealsFromDatabase()
+            roomMeal =  mealsRepo.mGetAllMealsFromDatabase()
         }
     }
 }

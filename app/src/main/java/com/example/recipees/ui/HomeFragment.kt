@@ -44,11 +44,12 @@ class HomeFragment : Fragment() {
     @SuppressLint("NotifyDataSetChanged")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val supAdapter = SupAdapter()
+        //check to internet connection
         if(activity?.let { isOnline(it.applicationContext) } == true){
             mealsViewModel.getFirstMeal()
             lifecycleScope.launch{
                 try {
-                    val supAdapter = SupAdapter()
                     mealsViewModel.firstMeal.collect{
                         if (it != null) {
                             supAdapter.setData(it.categories)
@@ -60,9 +61,22 @@ class HomeFragment : Fragment() {
                     Toast.makeText(activity , e.message.toString() , Toast.LENGTH_LONG).show()
                     binding.error.text = e.message.toString()
                 }
-
+                mealsViewModel.insertData()
+                Toast.makeText(activity , "inserted data to room" , Toast.LENGTH_LONG).show()
             }
+
         }else{
+            mealsViewModel.getDataFromDatabase()
+            lifecycleScope.launch {
+                mealsViewModel.roomMeal?.collect{
+                    if (it != null) {
+                        supAdapter.setData(it)
+                    }
+                    binding.firstMeal.adapter = supAdapter
+                    binding.firstMeal.layoutManager = LinearLayoutManager(activity ,RecyclerView.HORIZONTAL ,false)
+                }
+            }
+
             binding.error.text = "Internet is not available"
         }
 
