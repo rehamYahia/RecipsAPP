@@ -73,8 +73,7 @@ class HomeFragment : Fragment() {
     fun isOnline(context: Context): Boolean {
         val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         if (connectivityManager != null) {
-            val capabilities =
-                connectivityManager.getNetworkCapabilities(connectivityManager.activeNetwork)
+            val capabilities = connectivityManager.getNetworkCapabilities(connectivityManager.activeNetwork)
             if (capabilities != null) {
                 if (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR)) {
                     return true

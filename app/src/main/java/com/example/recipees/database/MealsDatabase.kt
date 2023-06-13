@@ -1,12 +1,11 @@
 package com.example.recipees.database
 
 import android.content.Context
-import androidx.room.Database
-import androidx.room.Room
-import androidx.room.RoomDatabase
+import androidx.room.*
 import com.example.recipees.model.Category
 
 @Database(entities = [Category::class] , version = 1)
+@TypeConverters(Converters::class)
 abstract class MealsDatabase  :RoomDatabase(){
 
     abstract fun getDao():MealsDao
@@ -18,6 +17,7 @@ abstract class MealsDatabase  :RoomDatabase(){
                 INSTANCE = Room.databaseBuilder<MealsDatabase>(
                     context.applicationContext , MealsDatabase::class.java , "mealDb"
                 ).allowMainThreadQueries()
+                    .fallbackToDestructiveMigration()
                     .build()
             }
             return INSTANCE as MealsDatabase
