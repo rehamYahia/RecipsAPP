@@ -1,6 +1,9 @@
 package com.example.recipees.ui
 
 import android.annotation.SuppressLint
+import android.content.Context
+import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -41,26 +44,47 @@ class HomeFragment : Fragment() {
     @SuppressLint("NotifyDataSetChanged")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        mealsViewModel.getFirstMeal()
-        lifecycleScope.launch{
-            try {
-                val supAdapter = SupAdapter()
-                mealsViewModel.firstMeal.collect{
-                    if (it != null) {
-                        supAdapter.setData(it.categories)
+        if(activity?.let { isOnline(it.applicationContext) } == true){
+            mealsViewModel.getFirstMeal()
+            lifecycleScope.launch{
+                try {
+                    val supAdapter = SupAdapter()
+                    mealsViewModel.firstMeal.collect{
+                        if (it != null) {
+                            supAdapter.setData(it.categories)
+                        }
+                        binding.firstMeal.adapter = supAdapter
+                        binding.firstMeal.layoutManager = LinearLayoutManager(activity ,RecyclerView.HORIZONTAL ,false)
                     }
-                    binding.firstMeal.adapter = supAdapter
-                    binding.firstMeal.layoutManager = LinearLayoutManager(activity ,RecyclerView.HORIZONTAL ,false)
+                }catch (e:Exception){
+                    Toast.makeText(activity , e.message.toString() , Toast.LENGTH_LONG).show()
+                    binding.error.text = e.message.toString()
                 }
-            }catch (e:Exception){
-                Toast.makeText(activity , e.message.toString() , Toast.LENGTH_LONG).show()
-                binding.error.text = e.message.toString()
-            }
 
+            }
+        }else{
+            binding.error.text = "Internet is not available"
         }
+
 
 
     }
 
-
+    fun isOnline(context: Context): Boolean {
+        val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        if (connectivityManager != null) {
+            val capabilities =
+                connectivityManager.getNetworkCapabilities(connectivityManager.activeNetwork)
+            if (capabilities != null) {
+                if (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR)) {
+                    return true
+                } else if (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI)) {
+                    return true
+                } else if (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET)) {
+                    return true
+                }
+            }
+        }
+        return false
+    }
 }
