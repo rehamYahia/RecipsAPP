@@ -13,5 +13,5 @@ class MealsRepoImp(private val mealsApiServices: MealsApiServices, private val m
 
     }
 
-    override suspend fun mGetAllMealsFromDatabase(): ResponseTable = mealsDao.getAllMealsOne()
+    override suspend fun mGetAllMealsFromDatabase(): ArrayList<Category>? = mealsDao.getAllMealsOne()
 }

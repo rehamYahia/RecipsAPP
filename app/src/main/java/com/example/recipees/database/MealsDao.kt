@@ -11,5 +11,5 @@ interface MealsDao {
     @Insert
     suspend fun insertMealsCategory(category: Category)
     @Query("SELECT * FROM MealsOne")
-    suspend fun getAllMealsOne() : ResponseTable
+    suspend fun getAllMealsOne() : ArrayList<Category>?
 }
