@@ -53,16 +53,19 @@ class HomeFragment : Fragment() {
                     mealsViewModel.firstMeal.collect{
                         if (it != null) {
                             supAdapter.setData(it.categories)
+                            binding.firstMeal.adapter = supAdapter
+                            binding.firstMeal.layoutManager = LinearLayoutManager(activity ,RecyclerView.HORIZONTAL ,false)
+                            //local database
+                            mealsViewModel.insertData()
+                            Toast.makeText(activity , "inserted data to room" , Toast.LENGTH_LONG).show()
                         }
-                        binding.firstMeal.adapter = supAdapter
-                        binding.firstMeal.layoutManager = LinearLayoutManager(activity ,RecyclerView.HORIZONTAL ,false)
+
                     }
                 }catch (e:Exception){
                     Toast.makeText(activity , e.message.toString() , Toast.LENGTH_LONG).show()
                     binding.error.text = e.message.toString()
                 }
-                mealsViewModel.insertData()
-                Toast.makeText(activity , "inserted data to room" , Toast.LENGTH_LONG).show()
+
             }
 
         }else{
@@ -71,9 +74,9 @@ class HomeFragment : Fragment() {
                 mealsViewModel.roomMeal?.collect{
                     if (it != null) {
                         supAdapter.setData(it)
+                        binding.firstMeal.adapter = supAdapter
+                        binding.firstMeal.layoutManager = LinearLayoutManager(activity ,RecyclerView.HORIZONTAL ,false)
                     }
-                    binding.firstMeal.adapter = supAdapter
-                    binding.firstMeal.layoutManager = LinearLayoutManager(activity ,RecyclerView.HORIZONTAL ,false)
                 }
             }
 
