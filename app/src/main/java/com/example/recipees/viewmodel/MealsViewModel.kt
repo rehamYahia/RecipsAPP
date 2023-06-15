@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.recipees.model.Category
 import com.example.recipees.model.Response
 import com.example.recipees.repo.MealsRepo
+import dagger.assisted.Assisted
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -16,8 +17,8 @@ class MealsViewModel @Inject constructor(private val mealsRepo: MealsRepo) :View
     private val _firstMeal : MutableStateFlow<Response?> = MutableStateFlow(null)
      val firstMeal : StateFlow<Response?> = _firstMeal
 
-    private val _roomMeal : MutableStateFlow<ArrayList<Category>?> = MutableStateFlow(null)
-    val roomMeal : StateFlow<ArrayList<Category>?> = _roomMeal
+    private val _roomMeal : MutableStateFlow<Response?> = MutableStateFlow(null)
+    val roomMeal : StateFlow<Response?> = _roomMeal
 
     fun getFirstMeal(){
         viewModelScope.launch {

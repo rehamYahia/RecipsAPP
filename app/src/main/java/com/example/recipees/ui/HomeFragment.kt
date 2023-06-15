@@ -73,7 +73,7 @@ class HomeFragment : Fragment() {
             lifecycleScope.launch {
                 mealsViewModel.roomMeal.collect{
                     if (it != null) {
-                        supAdapter.setData(it)
+                        supAdapter.setData(it.categories)
                         binding.firstMeal.adapter = supAdapter
                         binding.firstMeal.layoutManager = LinearLayoutManager(activity ,RecyclerView.HORIZONTAL ,false)
                     }

@@ -10,5 +10,5 @@ interface MealsRepo {
 
     suspend fun insertMealToDatabase(category: Category)
 
-    suspend fun mGetAllMealsFromDatabase(): ArrayList<Category>?
+    suspend fun mGetAllMealsFromDatabase(): Response
 }
