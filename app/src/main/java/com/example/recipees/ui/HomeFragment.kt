@@ -46,7 +46,7 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val supAdapter = SupAdapter()
         //check to internet connection
-        if(activity?.let { isOnline(it.applicationContext) } == true){
+//        if(activity?.let { isOnline(it.applicationContext) } == true){
             mealsViewModel.getFirstMeal()
             lifecycleScope.launch{
                 try {
@@ -56,8 +56,11 @@ class HomeFragment : Fragment() {
                             binding.firstMeal.adapter = supAdapter
                             binding.firstMeal.layoutManager = LinearLayoutManager(activity ,RecyclerView.HORIZONTAL ,false)
                             //local database
-                            mealsViewModel.insertData()
-                            Toast.makeText(activity , "inserted data to room" , Toast.LENGTH_LONG).show()
+//                            for(i in it.categories){
+//                                mealsViewModel.insertData(i)
+//                            }
+
+                            Toast.makeText(activity , "room database inserted" , Toast.LENGTH_LONG).show()
                         }
 
                     }
@@ -68,20 +71,21 @@ class HomeFragment : Fragment() {
 
             }
 
-        }else{
-            mealsViewModel.getDataFromDatabase()
-            lifecycleScope.launch {
-                mealsViewModel.roomMeal.collect{
-                    if (it != null) {
-                        supAdapter.setData(it.categories)
-                        binding.firstMeal.adapter = supAdapter
-                        binding.firstMeal.layoutManager = LinearLayoutManager(activity ,RecyclerView.HORIZONTAL ,false)
-                    }
-                }
-            }
+      //else
+//            binding.error.text = "Internet is not available"
+//            mealsViewModel.getDataFromDatabase()
+//            lifecycleScope.launch {
+//                mealsViewModel.roomMeal.collect{
+//                    if (it != null) {
+//                        supAdapter.setData(it)
+//                        binding.firstMeal.adapter = supAdapter
+//                        binding.firstMeal.layoutManager = LinearLayoutManager(activity ,RecyclerView.HORIZONTAL ,false)
+//                    }
+//                }
+//            }
 
-            binding.error.text = "Internet is not available"
-        }
+
+      //  }
 
 
 

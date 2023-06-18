@@ -15,7 +15,7 @@ import dagger.hilt.components.SingletonComponent
 object RepositoryModule {
 
     @Provides
-    fun provideRepo(mealsApiServices: MealsApiServices , MealsDao:MealsDao):MealsRepo{
-        return MealsRepoImp(mealsApiServices ,MealsDao )
+    fun provideRepo(mealsApiServices: MealsApiServices , mealsDao:MealsDao):MealsRepo{
+        return MealsRepoImp(mealsApiServices ,mealsDao )
     }
 }

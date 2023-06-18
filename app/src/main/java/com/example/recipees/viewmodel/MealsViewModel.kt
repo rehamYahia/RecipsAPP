@@ -2,6 +2,8 @@ package com.example.recipees.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.recipees.database.EntityMeals
+import com.example.recipees.database.MealOne
 import com.example.recipees.model.Category
 import com.example.recipees.model.Response
 import com.example.recipees.repo.MealsRepo
@@ -17,8 +19,8 @@ class MealsViewModel @Inject constructor(private val mealsRepo: MealsRepo) :View
     private val _firstMeal : MutableStateFlow<Response?> = MutableStateFlow(null)
      val firstMeal : StateFlow<Response?> = _firstMeal
 
-    private val _roomMeal : MutableStateFlow<Response?> = MutableStateFlow(null)
-    val roomMeal : StateFlow<Response?> = _roomMeal
+    private val _roomMeal : MutableStateFlow<ArrayList<EntityMeals>?> = MutableStateFlow(null)
+    val roomMeal : MutableStateFlow<ArrayList<EntityMeals>?> = _roomMeal
 
     fun getFirstMeal(){
         viewModelScope.launch {
@@ -26,12 +28,9 @@ class MealsViewModel @Inject constructor(private val mealsRepo: MealsRepo) :View
         }
     }
 
-    fun insertData(){
+    fun insertData(mealOne: MealOne){
         viewModelScope.launch{
-            val list = mealsRepo.getMealsFromRemote().categories
-        for (i in list){
-            mealsRepo.insertMealToDatabase(i)
-        }
+            mealsRepo.insertMealToDatabase(mealOne)
         }
     }
 
