@@ -4,7 +4,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 
-@Entity(tableName = "MealsOne"  )
+@Entity
 data class Response(
     val categories: ArrayList<Category>,
 )

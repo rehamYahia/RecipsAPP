@@ -1,8 +1,6 @@
 package com.example.recipees.repo
 
-import com.example.recipees.database.EntityMeals
-import com.example.recipees.database.MealOne
-import com.example.recipees.model.Category
+import androidx.lifecycle.LiveData
 import com.example.recipees.model.Response
 
 
@@ -12,5 +10,5 @@ interface MealsRepo {
 
     suspend fun insertMealToDatabase(mealOne: MealOne)
 
-    suspend fun mGetAllMealsFromDatabase(): ArrayList<EntityMeals>
+     fun mGetAllMealsFromDatabase(): LiveData<List<MealOne>>
 }

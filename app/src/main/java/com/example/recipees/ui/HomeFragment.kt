@@ -45,8 +45,7 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val supAdapter = SupAdapter()
-        //check to internet connection
-//        if(activity?.let { isOnline(it.applicationContext) } == true){
+
             mealsViewModel.getFirstMeal()
             lifecycleScope.launch{
                 try {
@@ -55,11 +54,10 @@ class HomeFragment : Fragment() {
                             supAdapter.setData(it.categories)
                             binding.firstMeal.adapter = supAdapter
                             binding.firstMeal.layoutManager = LinearLayoutManager(activity ,RecyclerView.HORIZONTAL ,false)
-                            //local database
-//                            for(i in it.categories){
-//                                mealsViewModel.insertData(i)
-//                            }
-
+                           // local database
+                            for(data in it.categories){
+                                mealsViewModel.insertData(data)
+                            }
                             Toast.makeText(activity , "room database inserted" , Toast.LENGTH_LONG).show()
                         }
 

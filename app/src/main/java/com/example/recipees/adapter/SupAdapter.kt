@@ -8,9 +8,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.recipees.R
-import com.example.recipees.database.EntityMeals
 import com.example.recipees.model.Category
-import com.example.recipees.model.Response
 
 
 class SupAdapter() :RecyclerView.Adapter<SupAdapter.SupViewHolder>(){
