@@ -14,7 +14,7 @@ interface MealsDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertMealsCategory(category: Category)
 
-    @Query ("SELECT * FROM Response ")
+    @Query ("SELECT * FROM Category")
      fun getAllMealsOne() : LiveData<List<Category>>
 
 }

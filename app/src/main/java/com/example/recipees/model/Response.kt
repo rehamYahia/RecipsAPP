@@ -6,5 +6,8 @@ import androidx.room.PrimaryKey
 
 @Entity
 data class Response(
-    val categories: ArrayList<Category>,
-)
+    val categories: List<Category>,
+){
+    @PrimaryKey(autoGenerate = true)
+    var idddd:Int = 0
+}

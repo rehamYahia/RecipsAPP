@@ -12,14 +12,14 @@ import com.example.recipees.model.Category
 
 
 class SupAdapter() :RecyclerView.Adapter<SupAdapter.SupViewHolder>(){
-    private var   list:ArrayList<Category> = java.util.ArrayList()
-    private var   meal:ArrayList<EntityMeals> = java.util.ArrayList()
-    public fun setData(arr:ArrayList<Category>){
+    private var   list:List<Category> = java.util.ArrayList()
+//    private var   meal:List<Category> = java.util.ArrayList()
+    public fun setData(arr:List<Category>){
         list = arr
     }
-    public fun setDataFromLocalDb(meals:ArrayList<EntityMeals>){
-        meal = meals
-    }
+//    public fun setDataFromLocalDb(meals:List<Category>){
+//        meal = meals
+//    }
 
     class SupViewHolder (view: View) : RecyclerView.ViewHolder(view){
 

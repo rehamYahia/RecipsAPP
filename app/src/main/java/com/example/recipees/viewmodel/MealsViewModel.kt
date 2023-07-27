@@ -3,6 +3,7 @@ package com.example.recipees.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.recipees.model.Category
 import com.example.recipees.model.Response
 import com.example.recipees.repo.MealsRepo
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -16,7 +17,7 @@ class MealsViewModel @Inject constructor(private val mealsRepo: MealsRepo) :View
     private val _firstMeal : MutableStateFlow<Response?> = MutableStateFlow(null)
      val firstMeal : StateFlow<Response?> = _firstMeal
 
-    var roomMeal : LiveData<List<MealOne>> ?=null
+    var roomMeal : LiveData<List<Category>>  ?= null
 
     fun getFirstMeal(){
         viewModelScope.launch {
@@ -24,9 +25,9 @@ class MealsViewModel @Inject constructor(private val mealsRepo: MealsRepo) :View
         }
     }
 
-    fun insertData(mealOne: MealOne){
+    fun insertData(category: Category){
         viewModelScope.launch{
-            mealsRepo.insertMealToDatabase(mealOne)
+            mealsRepo.insertMealToDatabase(category)
         }
     }
 

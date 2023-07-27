@@ -6,7 +6,7 @@ import com.example.recipees.model.Category
 import com.example.recipees.model.Response
 
 @Database(entities = [Category::class , Response::class] , version = 1 , exportSchema = false)
-//@TypeConverters(Converters::class)
+@TypeConverters(Converters::class)
 abstract class MealsDatabase  :RoomDatabase(){
 
     abstract fun getDao():MealsDao

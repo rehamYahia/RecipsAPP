@@ -11,13 +11,17 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.recipees.adapter.MainAdapter
 import com.example.recipees.adapter.SupAdapter
 import com.example.recipees.databinding.FragmentHomeBinding
+import com.example.recipees.model.Response
 import com.example.recipees.viewmodel.MealsViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 
 
@@ -41,10 +45,11 @@ class HomeFragment : Fragment() {
         return view
     }
 
-    @SuppressLint("NotifyDataSetChanged")
+    @SuppressLint("NotifyDataSetChanged", "SuspiciousIndentation")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val supAdapter = SupAdapter()
+        val mainAdapter = MainAdapter()
 
             mealsViewModel.getFirstMeal()
             lifecycleScope.launch{
@@ -52,12 +57,19 @@ class HomeFragment : Fragment() {
                     mealsViewModel.firstMeal.collect{
                         if (it != null) {
                             supAdapter.setData(it.categories)
+                            mainAdapter.setArray(it.categories)
                             binding.firstMeal.adapter = supAdapter
                             binding.firstMeal.layoutManager = LinearLayoutManager(activity ,RecyclerView.HORIZONTAL ,false)
-                           // local database
-                            for(data in it.categories){
+
+                            binding.mainRecy.adapter = mainAdapter
+                            binding.mainRecy.layoutManager = LinearLayoutManager(activity ,RecyclerView.HORIZONTAL ,false)
+
+//                            local database
+                            for (data in it.categories){
                                 mealsViewModel.insertData(data)
                             }
+//                            mealsViewModel.insertData(it)
+
                             Toast.makeText(activity , "room database inserted" , Toast.LENGTH_LONG).show()
                         }
 
@@ -67,7 +79,21 @@ class HomeFragment : Fragment() {
                     binding.error.text = e.message.toString()
                 }
 
-            }
+
+                //room
+//                try {
+//                    mealsViewModel.roomMeal?.observe(viewLifecycleOwner , Observer {
+//                        if(it != null){
+//                            supAdapter.setData(it)
+//                            binding.firstMeal.adapter = supAdapter
+//                            binding.firstMeal.layoutManager = LinearLayoutManager(activity ,RecyclerView.HORIZONTAL ,false)
+//                        }
+//                    })
+//                }catch (e:Exception){
+//                    Toast.makeText(activity , e.message.toString() , Toast.LENGTH_LONG).show()
+//                }
+//            }
+        //room
 
       //else
 //            binding.error.text = "Internet is not available"
@@ -83,24 +109,21 @@ class HomeFragment : Fragment() {
 //            }
 
 
-      //  }
-
-
-
-    }
-
-    fun isOnline(context: Context): Boolean {
-        val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-        val capabilities = connectivityManager.getNetworkCapabilities(connectivityManager.activeNetwork)
-        if (capabilities != null) {
-            if (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR)) {
-                return true
-            } else if (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI)) {
-                return true
-            } else if (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET)) {
-                return true
-            }
         }
-        return false
     }
+
+//    fun isOnline(context: Context): Boolean {
+//        val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+//        val capabilities = connectivityManager.getNetworkCapabilities(connectivityManager.activeNetwork)
+//        if (capabilities != null) {
+//            if (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR)) {
+//                return true
+//            } else if (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI)) {
+//                return true
+//            } else if (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET)) {
+//                return true
+//            }
+//        }
+//        return false
+//    }
 }
