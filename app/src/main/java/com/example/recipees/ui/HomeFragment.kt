@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.SearchView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -52,78 +53,98 @@ class HomeFragment : Fragment() {
         val mainAdapter = MainAdapter()
 
             mealsViewModel.getFirstMeal()
-            lifecycleScope.launch{
+            mealsViewModel.getMealFilter("Seafood")
+
+
+            lifecycleScope.launch {
                 try {
-                    mealsViewModel.firstMeal.collect{
+                    mealsViewModel.firstMeal.collect {
                         if (it != null) {
-                            supAdapter.setData(it.categories)
                             mainAdapter.setArray(it.categories)
-                            binding.firstMeal.adapter = supAdapter
-                            binding.firstMeal.layoutManager = LinearLayoutManager(activity ,RecyclerView.HORIZONTAL ,false)
-
                             binding.mainRecy.adapter = mainAdapter
-                            binding.mainRecy.layoutManager = LinearLayoutManager(activity ,RecyclerView.HORIZONTAL ,false)
-
+                            binding.mainRecy.layoutManager =
+                                LinearLayoutManager(activity, RecyclerView.HORIZONTAL, false)
 //                            local database
-                            for (data in it.categories){
+                            for (data in it.categories) {
                                 mealsViewModel.insertData(data)
                             }
 //                            mealsViewModel.insertData(it)
-
-                            Toast.makeText(activity , "room database inserted" , Toast.LENGTH_LONG).show()
+                            Toast.makeText(activity, "room database inserted", Toast.LENGTH_LONG).show()
                         }
-
                     }
-                }catch (e:Exception){
-                    Toast.makeText(activity , e.message.toString() , Toast.LENGTH_LONG).show()
+
+                    mealsViewModel.filterMeal.collect{ data ->
+                        if (data != null) {
+                            supAdapter.setData(data.meals)
+                            binding.firstMeal.adapter = supAdapter
+                            binding.firstMeal.layoutManager =
+                                LinearLayoutManager(activity, RecyclerView.HORIZONTAL, false)
+                        }
+                    }
+                } catch (e: Exception) {
+                    Toast.makeText(activity, e.message.toString(), Toast.LENGTH_LONG).show()
                     binding.error.text = e.message.toString()
                 }
+            }
 
-
-                //room
-//                try {
-//                    mealsViewModel.roomMeal?.observe(viewLifecycleOwner , Observer {
-//                        if(it != null){
-//                            supAdapter.setData(it)
-//                            binding.firstMeal.adapter = supAdapter
-//                            binding.firstMeal.layoutManager = LinearLayoutManager(activity ,RecyclerView.HORIZONTAL ,false)
+        //-------------------------------------------------------------------------------------
+//            binding.searchBar.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+//                override fun onQueryTextSubmit(query: String?): Boolean {
+//                    if (query != null) {
+//                        mealsViewModel.getMealFilter(query)
+//                        lifecycleScope.launch {
+//                            mealsViewModel.filterMeal.collect {
+//                                if (it != null) {
+//                                    supAdapter.setData(it.meals)
+//                                    binding.firstMeal.adapter = supAdapter
+//                                    binding.firstMeal.layoutManager =
+//                                        LinearLayoutManager(activity, RecyclerView.HORIZONTAL, false)
+//                                }
+//                            }
 //                        }
-//                    })
-//                }catch (e:Exception){
-//                    Toast.makeText(activity , e.message.toString() , Toast.LENGTH_LONG).show()
+//                    }
+//                    return true
 //                }
-//            }
-        //room
+//
+//                override fun onQueryTextChange(query: String?): Boolean {
+//                    if (query != null) {
+//                        mealsViewModel.getMealFilter(query)
+//                        lifecycleScope.launch {
+//                            mealsViewModel.filterMeal.collect {
+//                                if (it != null) {
+//                                    supAdapter.setData(it.meals)
+//                                    binding.firstMeal.adapter = supAdapter
+//                                    binding.firstMeal.layoutManager =
+//                                        LinearLayoutManager(activity, RecyclerView.HORIZONTAL, false)
+//                                }
+//                            }
+//                        }
+//                    }
+//                    return true
+//                }
+//
+//            })
 
-      //else
-//            binding.error.text = "Internet is not available"
-//            mealsViewModel.getDataFromDatabase()
+        //---------------------------------------------------------------------
 //            lifecycleScope.launch {
-//                mealsViewModel.roomMeal.collect{
+//            try {
+//                mealsViewModel.filterMeal.collect{
 //                    if (it != null) {
-//                        supAdapter.setData(it)
+//                        supAdapter.setData(it.meals)
 //                        binding.firstMeal.adapter = supAdapter
 //                        binding.firstMeal.layoutManager = LinearLayoutManager(activity ,RecyclerView.HORIZONTAL ,false)
 //                    }
 //                }
-//            }
-
-
-        }
-    }
-
-//    fun isOnline(context: Context): Boolean {
-//        val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-//        val capabilities = connectivityManager.getNetworkCapabilities(connectivityManager.activeNetwork)
-//        if (capabilities != null) {
-//            if (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR)) {
-//                return true
-//            } else if (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI)) {
-//                return true
-//            } else if (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET)) {
-//                return true
+//            }catch (e: Exception) {
+//                Toast.makeText(activity, e.message.toString(), Toast.LENGTH_LONG).show()
+//                binding.error.text = e.message.toString()
 //            }
 //        }
-//        return false
-//    }
+//
+//            lifecycleScope.launch {
+
+//        }
+
+
+    }
 }

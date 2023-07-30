@@ -33,14 +33,14 @@
         android:textSize="@dimen/_16sdp"
         android:layout_marginBottom="@dimen/_7sdp"
         android:textStyle="bold"/>
-    <TextView
-            android:id="@+id/mealsDescription"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:maxLines="4"
-            android:layout_marginStart="@dimen/_3sdp"
-            android:layout_marginBottom="@dimen/_3sdp"
-            android:textSize="@dimen/_15sdp"
-            />
+<!--    <TextView-->
+<!--            android:id="@+id/mealsDescription"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:maxLines="4"-->
+<!--            android:layout_marginStart="@dimen/_3sdp"-->
+<!--            android:layout_marginBottom="@dimen/_3sdp"-->
+<!--            android:textSize="@dimen/_15sdp"-->
+<!--            />-->
 
 </LinearLayout>

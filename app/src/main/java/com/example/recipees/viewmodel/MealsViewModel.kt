@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.recipees.model.Category
+import com.example.recipees.model.MealFilter
 import com.example.recipees.model.Response
 import com.example.recipees.repo.MealsRepo
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -17,11 +18,20 @@ class MealsViewModel @Inject constructor(private val mealsRepo: MealsRepo) :View
     private val _firstMeal : MutableStateFlow<Response?> = MutableStateFlow(null)
      val firstMeal : StateFlow<Response?> = _firstMeal
 
+    private val _filterMeal : MutableStateFlow<MealFilter?> = MutableStateFlow(null)
+    val filterMeal : StateFlow<MealFilter?> = _filterMeal
+
     var roomMeal : LiveData<List<Category>>  ?= null
 
     fun getFirstMeal(){
         viewModelScope.launch {
             _firstMeal.value = mealsRepo.getMealsFromRemote()
+        }
+    }
+
+    fun getMealFilter(category:String){
+        viewModelScope.launch {
+            _filterMeal.value = mealsRepo.getMealFilter(category)
         }
     }
 
