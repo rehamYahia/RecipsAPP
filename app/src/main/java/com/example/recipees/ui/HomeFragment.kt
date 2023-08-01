@@ -31,6 +31,9 @@ class HomeFragment : Fragment() {
     private  var _binding: FragmentHomeBinding?=null
     private val binding get()= _binding!!
     private val mealsViewModel :MealsViewModel by viewModels()
+    val supAdapter = SupAdapter()
+    val mainAdapter = MainAdapter()
+     var queryName:String = "Dessert"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,102 +52,61 @@ class HomeFragment : Fragment() {
     @SuppressLint("NotifyDataSetChanged", "SuspiciousIndentation")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val supAdapter = SupAdapter()
-        val mainAdapter = MainAdapter()
+
 
             mealsViewModel.getFirstMeal()
-            mealsViewModel.getMealFilter("Seafood")
-
-
             lifecycleScope.launch {
-                try {
-                    mealsViewModel.firstMeal.collect {
-                        if (it != null) {
-                            mainAdapter.setArray(it.categories)
-                            binding.mainRecy.adapter = mainAdapter
-                            binding.mainRecy.layoutManager =
-                                LinearLayoutManager(activity, RecyclerView.HORIZONTAL, false)
+                mealsViewModel.firstMeal.collect {
+                    if (it != null) {
+                        mainAdapter.setArray(it.categories)
+                        binding.mainRecy.adapter = mainAdapter
+                        binding.mainRecy.layoutManager =
+                            LinearLayoutManager(activity, RecyclerView.HORIZONTAL, false)
 //                            local database
-                            for (data in it.categories) {
-                                mealsViewModel.insertData(data)
-                            }
+                        for (data in it.categories) {
+                            mealsViewModel.insertData(data)
+                        }
 //                            mealsViewModel.insertData(it)
-                            Toast.makeText(activity, "room database inserted", Toast.LENGTH_LONG).show()
-                        }
+                        Toast.makeText(activity, "room database inserted", Toast.LENGTH_LONG).show()
                     }
-
-                    mealsViewModel.filterMeal.collect{ data ->
-                        if (data != null) {
-                            supAdapter.setData(data.meals)
-                            binding.firstMeal.adapter = supAdapter
-                            binding.firstMeal.layoutManager =
-                                LinearLayoutManager(activity, RecyclerView.HORIZONTAL, false)
-                        }
-                    }
-                } catch (e: Exception) {
-                    Toast.makeText(activity, e.message.toString(), Toast.LENGTH_LONG).show()
-                    binding.error.text = e.message.toString()
                 }
+
+        }
+        mealsViewModel.getMealFilter(queryName)
+        fillData()
+
+        binding.searchBar.setOnQueryTextListener(object :SearchView.OnQueryTextListener{
+            override fun onQueryTextSubmit(query: String?): Boolean {
+              if(query != null){
+                  queryName = query
+                  fillData()
+              }
+                return true
             }
 
-        //-------------------------------------------------------------------------------------
-//            binding.searchBar.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-//                override fun onQueryTextSubmit(query: String?): Boolean {
-//                    if (query != null) {
-//                        mealsViewModel.getMealFilter(query)
-//                        lifecycleScope.launch {
-//                            mealsViewModel.filterMeal.collect {
-//                                if (it != null) {
-//                                    supAdapter.setData(it.meals)
-//                                    binding.firstMeal.adapter = supAdapter
-//                                    binding.firstMeal.layoutManager =
-//                                        LinearLayoutManager(activity, RecyclerView.HORIZONTAL, false)
-//                                }
-//                            }
-//                        }
-//                    }
-//                    return true
-//                }
-//
-//                override fun onQueryTextChange(query: String?): Boolean {
-//                    if (query != null) {
-//                        mealsViewModel.getMealFilter(query)
-//                        lifecycleScope.launch {
-//                            mealsViewModel.filterMeal.collect {
-//                                if (it != null) {
-//                                    supAdapter.setData(it.meals)
-//                                    binding.firstMeal.adapter = supAdapter
-//                                    binding.firstMeal.layoutManager =
-//                                        LinearLayoutManager(activity, RecyclerView.HORIZONTAL, false)
-//                                }
-//                            }
-//                        }
-//                    }
-//                    return true
-//                }
-//
-//            })
+            override fun onQueryTextChange(query: String?): Boolean {
+                if(query != null){
+                    queryName = query
+                    fillData()
+                }
+                return true
+            }
 
-        //---------------------------------------------------------------------
-//            lifecycleScope.launch {
-//            try {
-//                mealsViewModel.filterMeal.collect{
-//                    if (it != null) {
-//                        supAdapter.setData(it.meals)
-//                        binding.firstMeal.adapter = supAdapter
-//                        binding.firstMeal.layoutManager = LinearLayoutManager(activity ,RecyclerView.HORIZONTAL ,false)
-//                    }
-//                }
-//            }catch (e: Exception) {
-//                Toast.makeText(activity, e.message.toString(), Toast.LENGTH_LONG).show()
-//                binding.error.text = e.message.toString()
-//            }
-//        }
-//
-//            lifecycleScope.launch {
+        })
 
-//        }
+    }
 
+    private fun fillData(){
 
+        lifecycleScope.launch {
+            mealsViewModel.filterMeal.collect{ data ->
+                if (data != null) {
+                    supAdapter.setData(data.meals)
+                    binding.firstMeal.adapter = supAdapter
+                    binding.firstMeal.layoutManager =
+                        LinearLayoutManager(activity, RecyclerView.HORIZONTAL, false)
+                }
+            }
+        }
     }
 }
