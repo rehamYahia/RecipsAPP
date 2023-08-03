@@ -1,9 +1,6 @@
 package com.example.recipees.ui
 
 import android.annotation.SuppressLint
-import android.content.Context
-import android.net.ConnectivityManager
-import android.net.NetworkCapabilities
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,17 +9,15 @@ import android.widget.SearchView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.recipees.adapter.MainAdapter
 import com.example.recipees.adapter.SupAdapter
 import com.example.recipees.databinding.FragmentHomeBinding
-import com.example.recipees.model.Response
+import com.example.recipees.model.NameCat
 import com.example.recipees.viewmodel.MealsViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 
 
@@ -54,8 +49,9 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
 
-            mealsViewModel.getFirstMeal()
+
             lifecycleScope.launch {
+                mealsViewModel.getFirstMeal()
                 mealsViewModel.firstMeal.collect {
                     if (it != null) {
                         mainAdapter.setArray(it.categories)
@@ -72,23 +68,19 @@ class HomeFragment : Fragment() {
                 }
 
         }
-        mealsViewModel.getMealFilter(queryName)
-        fillData()
+
+        fillData(queryName , queryName)
 
         binding.searchBar.setOnQueryTextListener(object :SearchView.OnQueryTextListener{
             override fun onQueryTextSubmit(query: String?): Boolean {
               if(query != null){
-                  queryName = query
-                  fillData()
+                  fillData(query , query)
               }
                 return true
             }
 
             override fun onQueryTextChange(query: String?): Boolean {
-                if(query != null){
-                    queryName = query
-                    fillData()
-                }
+
                 return true
             }
 
@@ -96,15 +88,19 @@ class HomeFragment : Fragment() {
 
     }
 
-    private fun fillData(){
-
+    private fun fillData(queryName:String , categoryName:String){
+        mealsViewModel.getMealFilter(queryName)
         lifecycleScope.launch {
-            mealsViewModel.filterMeal.collect{ data ->
-                if (data != null) {
-                    supAdapter.setData(data.meals)
+            mealsViewModel.filterMeal.collect{
+                if (it != null) {
+                    supAdapter.setData(it.meals)
                     binding.firstMeal.adapter = supAdapter
                     binding.firstMeal.layoutManager =
                         LinearLayoutManager(activity, RecyclerView.HORIZONTAL, false)
+                    for(meal in it.meals){
+                        mealsViewModel.insertMealFilterINRoom(meal , NameCat(categoryName))
+                    }
+
                 }
             }
         }

@@ -5,8 +5,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.example.recipees.model.Category
-import com.example.recipees.model.Response
+import com.example.recipees.model.*
 
 
 @Dao
@@ -16,5 +15,8 @@ interface MealsDao {
 
     @Query ("SELECT * FROM Category")
      fun getAllMealsOne() : LiveData<List<Category>>
+
+     @Insert(onConflict = OnConflictStrategy.IGNORE)
+     fun insertMealFilter(mealFilter: Meal , categoryName:NameCat)
 
 }

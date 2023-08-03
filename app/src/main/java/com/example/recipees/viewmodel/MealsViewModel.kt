@@ -3,9 +3,7 @@ package com.example.recipees.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.recipees.model.Category
-import com.example.recipees.model.MealFilter
-import com.example.recipees.model.Response
+import com.example.recipees.model.*
 import com.example.recipees.repo.MealsRepo
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -44,6 +42,12 @@ class MealsViewModel @Inject constructor(private val mealsRepo: MealsRepo) :View
     fun getDataFromDatabase(){
         viewModelScope.launch {
             roomMeal = mealsRepo.mGetAllMealsFromDatabase()
+        }
+    }
+
+    fun insertMealFilterINRoom(mealFilter: Meal , categoryName: NameCat){
+        viewModelScope.launch {
+            mealsRepo.insertMealFilter(mealFilter ,categoryName)
         }
     }
 }

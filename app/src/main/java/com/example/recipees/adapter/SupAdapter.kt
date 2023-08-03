@@ -14,19 +14,17 @@ import com.example.recipees.model.Meal
 
 class SupAdapter() :RecyclerView.Adapter<SupAdapter.SupViewHolder>(){
     private var   list:List<Meal> = java.util.ArrayList()
-//    private var   meal:List<Category> = java.util.ArrayList()
+
     public fun setData(arr:List<Meal>){
         list = arr
     }
-//    public fun setDataFromLocalDb(meals:List<Category>){
-//        meal = meals
-//    }
+
 
     class SupViewHolder (view: View) : RecyclerView.ViewHolder(view){
 
-        var title = view.findViewById<TextView>(R.id.mealaTitle)
+        var title: TextView = view.findViewById<TextView>(R.id.mealaTitle)
 //        var description = view.findViewById<TextView>(R.id.mealsDescription)
-        var image = view.findViewById<ImageView>(R.id.subImage)
+        var image: ImageView = view.findViewById<ImageView>(R.id.subImage)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SupViewHolder {
@@ -40,7 +38,6 @@ class SupAdapter() :RecyclerView.Adapter<SupAdapter.SupViewHolder>(){
 
     override fun onBindViewHolder(holder: SupViewHolder, position: Int) {
         holder.title.text = list[position].strMeal
-//        holder.description.text = list[position].
         Glide.with(holder.itemView.rootView.context).load( list[position].strMealThumb).into(holder.image)
 
     }
