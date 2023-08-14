@@ -93,6 +93,7 @@ class HomeFragment : Fragment() {
         lifecycleScope.launch {
             mealsViewModel.filterMeal.collect{
                 if (it != null) {
+                    binding.catName.setText("$queryName Category")
                     supAdapter.setData(it.meals)
                     binding.firstMeal.adapter = supAdapter
                     binding.firstMeal.layoutManager =
@@ -100,7 +101,6 @@ class HomeFragment : Fragment() {
                     for(meal in it.meals){
                         mealsViewModel.insertMealFilterINRoom(meal , NameCat(categoryName))
                     }
-
                 }
             }
         }
