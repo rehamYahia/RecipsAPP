@@ -5,11 +5,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.recipees.R
 import com.example.recipees.model.Category
 import com.example.recipees.model.Meal
+import com.example.recipees.ui.HomeFragmentDirections
 
 
 class SupAdapter() :RecyclerView.Adapter<SupAdapter.SupViewHolder>(){
@@ -39,6 +41,12 @@ class SupAdapter() :RecyclerView.Adapter<SupAdapter.SupViewHolder>(){
     override fun onBindViewHolder(holder: SupViewHolder, position: Int) {
         holder.title.text = list[position].strMeal
         Glide.with(holder.itemView.rootView.context).load( list[position].strMealThumb).into(holder.image)
+
+        holder.itemView.setOnClickListener {
+            val meal :Meal = list[position]
+            val action =  HomeFragmentDirections.actionHomeFragmentToDetailFragment(meal)
+            Navigation.findNavController(it).navigate(action)
+        }
 
     }
 }

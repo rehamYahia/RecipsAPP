@@ -11,4 +11,7 @@ interface MealsApiServices {
 
     @GET("filter.php")
     suspend fun getFilterMeal(@Query("c") category:String):MealFilter
+
+    @GET("lookup.php")
+    suspend fun getSpecificItem(@Query("i") id:Int) :MealFilter
 }

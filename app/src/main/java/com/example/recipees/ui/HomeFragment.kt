@@ -48,8 +48,6 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
-
             lifecycleScope.launch {
                 mealsViewModel.getFirstMeal()
                 mealsViewModel.firstMeal.collect {
