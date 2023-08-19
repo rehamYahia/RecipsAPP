@@ -15,5 +15,6 @@
     <fragment android:id="@+id/detailFragment" android:name="com.example.recipees.ui.DetailFragment"
               android:label="fragment_detail" tools:layout="@layout/fragment_detail">
         <argument android:name="meal" app:argType="com.example.recipees.model.Meal"/>
+        <argument android:name="mealId" app:argType="integer"/>
     </fragment>
 </navigation>

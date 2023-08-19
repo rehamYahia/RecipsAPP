@@ -162,12 +162,19 @@
 
             <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_40sdp"
+                    android:layout_height="wrap_content"
                     app:cardCornerRadius="@dimen/_7sdp"
                     android:layout_marginLeft="@dimen/_10sdp"
                     android:layout_marginRight="@dimen/_10sdp"
                     android:layout_marginTop="@dimen/_5sdp"
                     >
+
+                <TextView
+                        android:id="@+id/text2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/_15sdp"
+                />
 
             </androidx.cardview.widget.CardView>
 
@@ -175,7 +182,7 @@
             <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Ingredients"
+                    android:text="Instructions"
                     android:textSize="@dimen/_15sdp"
                     android:textStyle="bold"
                     android:layout_marginTop="@dimen/_10sdp"
@@ -184,13 +191,19 @@
 
             <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_40sdp"
+                    android:layout_height="wrap_content"
                     app:cardCornerRadius="@dimen/_7sdp"
                     android:layout_marginLeft="@dimen/_10sdp"
                     android:layout_marginRight="@dimen/_10sdp"
                     android:layout_marginTop="@dimen/_5sdp"
                     android:backgroundTint="@color/red"
             >
+                <TextView
+                        android:id="@+id/instructions"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/_15sdp"
+                />
 
             </androidx.cardview.widget.CardView>
         </LinearLayout>

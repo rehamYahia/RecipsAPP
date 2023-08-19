@@ -19,9 +19,11 @@ import com.example.recipees.databinding.FragmentDetailBinding
 import com.example.recipees.databinding.FragmentHomeBinding
 import com.example.recipees.model.Meal
 import com.example.recipees.viewmodel.MealsViewModel
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
-
+@AndroidEntryPoint
 class DetailFragment : Fragment() {
     private  var _binding: FragmentDetailBinding?=null
     private val binding get()= _binding!!
@@ -49,6 +51,16 @@ class DetailFragment : Fragment() {
         lifecycleScope.launch {
             val resultImage =  getBitmap(meal.strMealThumb)
             binding.urlImage.setImageBitmap(resultImage)
+            binding.instructions.text = args.mealId.toString()
+            mealsViewModel.getSpecificItem(args.mealId)
+
+            mealsViewModel.specificItem.collect{
+                if(it != null){
+                    for(i in it.meals){
+                        binding.instructions.text = i.strInstructions
+                    }
+                }
+            }
         }
 
 

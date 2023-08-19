@@ -21,6 +21,9 @@ class MealsViewModel @Inject constructor(private val mealsRepo: MealsRepo) :View
 
     var roomMeal : LiveData<List<Category>>  ?= null
 
+    private val _specificItem : MutableStateFlow<MealsDetails?> = MutableStateFlow(null)
+    val specificItem : StateFlow<MealsDetails?> = _specificItem
+
     fun getFirstMeal(){
         viewModelScope.launch {
             _firstMeal.value = mealsRepo.getMealsFromRemote()
@@ -49,5 +52,12 @@ class MealsViewModel @Inject constructor(private val mealsRepo: MealsRepo) :View
         viewModelScope.launch {
             mealsRepo.insertMealFilter(mealFilter ,categoryName)
         }
+    }
+
+     fun getSpecificItem(id:Int){
+        viewModelScope.launch {
+            _specificItem.value = mealsRepo.getLookupMeal(id)
+        }
+
     }
 }

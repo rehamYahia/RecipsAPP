@@ -11,9 +11,13 @@ interface MealsRepo {
 
     suspend fun getMealFilter(category : String): MealFilter;
 
+    suspend fun getLookupMeal(id:Int): MealsDetails
+
     //local
     suspend fun insertMealToDatabase(category: Category)
     fun mGetAllMealsFromDatabase(): LiveData<List<Category>>
 
     suspend fun insertMealFilter(mealFilter: Meal ,  categoryName: NameCat)
+
+
 }

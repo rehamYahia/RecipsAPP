@@ -35,18 +35,16 @@ class SupAdapter() :RecyclerView.Adapter<SupAdapter.SupViewHolder>(){
 
     override fun getItemCount(): Int {
         return list.size
-
     }
 
     override fun onBindViewHolder(holder: SupViewHolder, position: Int) {
         holder.title.text = list[position].strMeal
         Glide.with(holder.itemView.rootView.context).load( list[position].strMealThumb).into(holder.image)
-
         holder.itemView.setOnClickListener {
             val meal :Meal = list[position]
-            val action =  HomeFragmentDirections.actionHomeFragmentToDetailFragment(meal)
+            val mealId :Int = list[position].idMeal.toInt()
+            val action =  HomeFragmentDirections.actionHomeFragmentToDetailFragment(meal, mealId)
             Navigation.findNavController(it).navigate(action)
         }
-
     }
 }

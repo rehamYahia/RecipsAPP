@@ -9,7 +9,7 @@ import kotlinx.parcelize.Parcelize
 @Entity
 data class Meal(
     @PrimaryKey
-    val idMeal: String,
+    val idMeal: String, //foren2
     val strMeal: String,
     val strMealThumb: String
 ): Parcelable

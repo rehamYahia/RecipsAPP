@@ -10,7 +10,7 @@ import com.google.gson.annotations.SerializedName
 data class Category(
     @PrimaryKey(autoGenerate = true)
     val idCategory: Int,
-    val strCategory: String,
+    val strCategory: String,  //forien1
     val strCategoryDescription: String,
     val strCategoryThumb: String
 )

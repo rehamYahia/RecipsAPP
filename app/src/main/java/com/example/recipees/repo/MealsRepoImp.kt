@@ -9,6 +9,7 @@ class MealsRepoImp(private val mealsApiServices: MealsApiServices, private val m
     // remote
     override suspend fun getMealsFromRemote(): Response = mealsApiServices.getMeals()
     override suspend fun getMealFilter(category: String): MealFilter  = mealsApiServices.getFilterMeal(category)
+    override suspend fun getLookupMeal(id: Int): MealsDetails =   mealsApiServices.getSpecificItem(id)
 
     //local
 
