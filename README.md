@@ -1,14 +1,15 @@
 
+![Rectangle 9](https://github.com/rehamYahia/RecipsAPP/assets/63594588/70a5c44a-ece7-4575-92b3-0dd50d3fb2dc)
 
-![Recipes App](https://github.com/rehamYahia/RecipsAPP/assets/63594588/625d8598-2773-463a-b3ee-13db7d6bed0a)
+
 
 
 ### An Application that gets All  Meals Categories and gets all meals contains this category from rest API and when you select a meal the application go to the detail screen to display all description of this meal and when you use the search bar to search for the category all data contains this category will get.
-####__End Points:__
-##List all meal categories: www.themealdb.com/api/json/v1/1/categories.php
-##Filter by Category: www.themealdb.com/api/json/v1/1/filter.php?c=Seafood
-##Lookup full meal details by id: www.themealdb.com/api/json/v1/1/lookup.php?i=52772
-#### __I use several technical tools for this application like:__
+#### End Points:
+## List all meal categories: www.themealdb.com/api/json/v1/1/categories.php
+## Filter by Category: www.themealdb.com/api/json/v1/1/filter.php?c=Seafood
+## Lookup full meal details by id: www.themealdb.com/api/json/v1/1/lookup.php?i=52772
+#### I use several technical tools for this application like:
 - Rest Api using retrofit
 - MVVM Pattern
 - Navigation Component
@@ -22,10 +23,10 @@
 ### The first screen is the splash screen:
 ### The second screen is the home screen:
 ![p2](https://github.com/rehamYahia/RecipsAPP/assets/63594588/570afe69-4299-4808-8945-67ae2d77ddca)
-This screen contains a search bar to search for category names and get all meals of this category and contain two recycler view the first recycler view displays the category name and the second display all meals of the specific category.
+## This screen contains a search bar to search for category names and get all meals of this category and contain two recycler view the first recycler view displays the category name and the second display all meals of the specific category.
 
 
 ### The third screen is the details screen:
   ![p1](https://github.com/rehamYahia/RecipsAPP/assets/63594588/43891cba-7b31-407f-929a-980c85bb4165)
-  This screen containsCollapsingg Toolbar that contains the meal image and alldescriptionsn of this meal.  
+  ## This screen containsCollapsingg Toolbar that contains the meal image and alldescriptionsn of this meal.  
 
