@@ -13,9 +13,12 @@ import com.example.recipees.model.Category
 
 class MainAdapter : RecyclerView.Adapter<MainAdapter.MainViewHolder>() {
     private var   list:List<Category> = java.util.ArrayList()
+
     fun setArray(list:List<Category>){
         this.list = list
     }
+
+
 
 
     class MainViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -35,5 +38,11 @@ class MainAdapter : RecyclerView.Adapter<MainAdapter.MainViewHolder>() {
     override fun onBindViewHolder(holder: MainViewHolder, position: Int) {
         holder.textM.text = list.get(position).strCategory
         Glide.with(holder.itemView.rootView.context).load( list[position].strCategoryThumb).into(holder.image)
+        holder.itemView.setOnClickListener {
+        }
+
+
     }
+
+
 }

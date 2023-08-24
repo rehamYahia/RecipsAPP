@@ -29,6 +29,7 @@ class HomeFragment : Fragment() {
     val supAdapter = SupAdapter()
     val mainAdapter = MainAdapter()
      var queryName:String = "Dessert"
+     var categoryName: String ?= null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,14 +58,13 @@ class HomeFragment : Fragment() {
                         binding.mainRecy.layoutManager =
                             LinearLayoutManager(activity, RecyclerView.HORIZONTAL, false)
 //                            local database
-                        for (data in it.categories) {
-                            mealsViewModel.insertData(data)
-                        }
+//                        for (data in it.categories) {
+//                            mealsViewModel.insertData(data)
+//                        }
 //                            mealsViewModel.insertData(it)
-                        Toast.makeText(activity, "room database inserted", Toast.LENGTH_LONG).show()
+//                        Toast.makeText(activity, "room database inserted", Toast.LENGTH_LONG).show()
                     }
                 }
-
         }
 
         fillData(queryName , queryName)
