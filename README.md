@@ -31,12 +31,13 @@
   
 #### This screen containsCollapsingg Toolbar that contains the meal image and all descriptions of this meal.  
 
+![gitj](https://github.com/rehamYahia/RecipsAPP/assets/63594588/f6956ebc-d0b4-42fe-b18f-c14957af9c6a)
 
 
-## <picture><img src = "https://github.com/7oSkaaa/7oSkaaa/blob/main/Images/about_me.gif?raw=true" width = 50px></picture> About me
+## <picture><img src = "https://github.com/rehamYahia/RecipsAPP/assets/63594588/f6956ebc-d0b4-42fe-b18f-c14957af9c6a" width = 50px></picture> Recips Aplication
 
-<picture> <img align="right" src="https://github.com/rehamYahia/RecipsAPP/assets/63594588/570afe69-4299-4808-8945-67ae2d77ddca" width = 250px></picture>
-<picture> <img align="right" src="https://github.com/rehamYahia/RecipsAPP/assets/63594588/43891cba-7b31-407f-929a-980c85bb4165" width = 250px></picture>
+<picture> <img align="right" src="https://github.com/rehamYahia/RecipsAPP/assets/63594588/570afe69-4299-4808-8945-67ae2d77ddca" width = 350px></picture>
+<picture> <img align="right" src="https://github.com/rehamYahia/RecipsAPP/assets/63594588/43891cba-7b31-407f-929a-980c85bb4165" width = 350px></picture>
 
 <br><br>
 ### An Application that gets All  Meals Categories and gets all meals contains this category from rest API and when you select a meal the application go to the detail screen to display all description of this meal and when you use the search bar to search for the category all data contains this category will get.
@@ -46,7 +47,7 @@
 #### Lookup full meal details by id: www.themealdb.com/api/json/v1/1/lookup.php?i=52772
 ### I use several technical tools for this application:
 
-- :school: I am a `Junior` at [Faculty of Computers & Informatics](http://suez.edu.eg/ar/%d9%83%d9%84%d9%8a%d8%a9-%d8%a7%d9%84%d8%ad%d8%a7%d8%b3%d8%a8%d8%a7%d8%aa-%d9%88%d8%a7%d9%84%d9%85%d8%b9%d9%84%d9%88%d9%85%d8%a7%d8%aa/) at [Suez Canal University](http://suez.edu.eg/ar/).
+
 - :Rest Api using retrofit.
 - :MVVM Pattern.
 - :Navigation Component.
@@ -60,10 +61,11 @@
 ### The application contains three screens I will display it and explains the screens how work:
 ### The first screen is the splash screen:
 ### The second screen is the home screen:
-
-#### This screen contains a search bar to search for category names and get all meals of this category and contain two recyclers view the first recycler view displays the category name and the second display all meals of the specific category.
 ### The third screen is the details screen:
-#### This screen containsCollapsingg Toolbar that contains the meal image and all descriptions of this meal.  
+
+#### home screen contains a search bar to search for category names and get all meals of this category and contain two recyclers view the first recycler view displays the category name and the second display all meals of the specific category.
+### The third screen is the details screen:
+#### details screen containsCollapsingg Toolbar that contains the meal image and all descriptions of this meal.  
 
 
 
